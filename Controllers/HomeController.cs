@@ -2,9 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using studySession.Models;
 using studySession.Logic;
 using System.Diagnostics;
-using Microsoft.AspNetCore.Http.HttpResults;
-using OfficeOpenXml.Drawing.Controls;
-using studySession.Models;
 
 namespace studySession.Controllers
 {
