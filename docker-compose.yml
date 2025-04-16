@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:latest               #postgresの最新版を指定
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespw
+      POSTGRES_DB: postgres
+    ports:
+      - "45432:5432"          #外部ポート/コンテナポート
+    volumes:
+      - db_data:/var/lib/postgresql/data              #データ用のボリュームを定義.DBのデータファイルをボリュームに保存
+      - ./config/custom_pg_hba.conf:/etc/postgresql/custom_pg_hba.conf
+      - ./config/custom_postgresql.conf:/etc/postgresql/custom_postgresql.conf
+    command: >
+      postgres -c config_file=/etc/postgresql/custom_postgresql.conf
+
+volumes:
+  db_data:

@@ -1,0 +1,330 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/image/cork.png'); /* コルクの背景画像 */
+    background-size: auto;
+    background-position: center;
+    background-repeat: repeat;
+    position: relative;
+    min-height: 100vh; /* ビューポートの高さに合わせる */
+}
+
+
+#div_hedder {
+    font-size: 30px;
+    color:black;
+    background-image: url('/image/makeshappyinfi.png'); /* コルクの背景画像 */
+    background-size: contain;
+    background-position: center;
+    background-repeat: repeat;
+    position: relative;
+    height: 50px;
+    width: 100%;
+}
+
+.toumei {
+    background-color: rgba(255, 255, 255, 0.262);
+    height: 100%;
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+}
+
+.introdction {
+    /*width: 400px;*/
+    top: 5%;
+    background-color: rgba(255, 255, 255, 0.862);
+}
+
+.side_bar {
+    background-color: aquamarine;
+    width: 300px;
+    height: 100vh;
+    border-right: solid 1px;
+    border-right-color: burlywood;
+}
+
+.image_icon {
+    background-color: azure;
+    height: 150px;
+    width: 299px;
+}
+
+.serch-button{
+    border-radius:10%;
+    background-color:black;
+    color:#ffffff;
+}
+
+.serch-text {
+    border-radius: 0.5em;
+}
+
+.contents{
+    position:relative;
+    width:100%;
+}
+
+.buttons{
+    position:absolute;
+    right:100px;
+    top:20px;
+}
+
+.button-design {
+    height: 40px;
+    padding: 8px 16px;
+    border-radius:0.5em;
+    color:chocolate;
+}
+
+.container {
+    top: 100px;
+    border: 1px solid;
+    width: 90%;
+    height: 100vh;
+    position: relative;
+}
+
+.card-item {
+    margin-top: 30px;
+    border: 1px solid #eeeeee;
+    height: 450px;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 1em;
+    transform: rotate(-7deg);
+    cursor: pointer;
+
+}
+
+
+.card-item-rotate-red {
+    transform: rotate(-7deg);
+}
+
+.card-item-rotate-blue {
+    transform: rotate(7deg);
+}
+
+.card-item-image {
+    background-image: url('/image/human.jpg');
+    background-repeat:no-repeat;
+    width: 100%;
+    height: 100%;
+    border:1px solid black;
+}
+
+
+.pin {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top:-20px;
+}
+
+/* 画鋲の頭部分 */
+.head {
+    width: 20px;
+    height: 20px;
+    /*border-radius: 50%;*/
+    clip-path: polygon(0 0, 100% 0, 80% 30%, 80% 70%, 100% 100%, 0 100%, 20% 70%, 20% 30%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+   
+}
+
+.head-rotate-red {
+    background-color: red;
+    right: 2px;
+    transform: rotate(-5deg);
+}
+
+.head-rotate-blue {
+    background-color: blue;
+    right: 0px;
+    transform: rotate(5deg);
+}
+
+/* 画鋲の針部分 */
+.needle {
+    width: 6px;
+    height: 35px;
+    background-color: silver;
+    border-radius: 3px;
+    position: relative;
+   
+    top: -20px;
+    z-index: 0;
+}
+
+.needle-rotate-red {
+    transform: rotate(-5deg);
+}
+
+.needle-rotate-blue {
+    transform: rotate(5deg);
+}
+
+.item-center {
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+}
+
+.icon-style {
+    border: 1px solid black;
+    border-radius: 50%;
+    color: #ffffff;
+    background-color: black;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    font-weight: bold; /* 数字を太字に */
+}
+
+.margin-style {
+    margin-top: 10px;
+    margin-left: 15px;
+    padding: 5px 5px;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-left-20 {
+    margin-left: 40px;
+}
+
+.set-font-weight {
+    font-weight: bold;
+}
+
+/* 震えるアニメーション */
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+   /* 10% {
+        transform: translate(-1px, -2px) rotate(0deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(0deg);
+    }*/
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    /*60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(0deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }*/
+
+    100% {
+        transform: translate(1px, -2px) rotate(0deg);
+    }
+}
+
+/* hover時に震えるアニメーションを適用 */
+.card-item:hover {
+    animation: shake 1.5s ;
+}
+
+
+.select-style {
+    height: 35px;
+    width: 250px;
+    border-radius: 1em;
+    text-align: center;
+}
+
+
+
+.modal {
+    display:none;
+    position: fixed;
+    z-index: 9998;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    top:-100px;
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height:600px;
+
+}
+
+.main {
+    margin-left: 50px;
+    margin-top: 30px;
+    overflow-y: auto;
+    height: 440px;
+}
+
+.input-area-style {
+    /*    font-weight:bold;*/
+    font-size: 20pt;
+    margin-top: 20px;
+    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+input[type=text] {
+    border-radius: 0.5em;
+    width: 400px;
+}
+
+
+.selected {
+    border-color: blue;
+    background-color: lightblue;
+}

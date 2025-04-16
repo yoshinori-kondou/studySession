@@ -1,0 +1,19 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    //"target": "ES5", // コンパイル後のJavaScriptのバージョン
+    //"module": "commonjs", // モジュールシステム
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true, // 厳密な型チェック
+    "outDir": "./wwwroot/js", // コンパイル後のファイル出力先
+    "sourceMap": true // デバッグ用にソースマップを生成
+  },
+  "include": [
+    "Scripts/**/*.ts" // TypeScriptファイルのディレクトリ
+  ],
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}
