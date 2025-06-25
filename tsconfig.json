@@ -7,7 +7,9 @@
     "module": "commonjs",
     "strict": true, // 厳密な型チェック
     "outDir": "./wwwroot/js", // コンパイル後のファイル出力先
-    "sourceMap": true // デバッグ用にソースマップを生成
+    "sourceMap": true, // デバッグ用にソースマップを生成
+    "inlineSources": true, // ← 追加：.tsの中身を.mapに埋め込む
+    "sourceRoot": "../Scripts" // ← 追加：.tsファイルのある場所を指定
   },
   "include": [
     "Scripts/**/*.ts" // TypeScriptファイルのディレクトリ

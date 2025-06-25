@@ -3,42 +3,59 @@ using studySession.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using studySession.Controllers;
 using studySession.DB;
+using Microsoft.Extensions.Logging;
 
 namespace studySession.Logic
 {
     public class HomeList
     {
-        public HomeList()
+        private readonly ILogger<HomeList> _logger;
+
+
+        public HomeList(ILogger<HomeList> logger)
         {
+            _logger = logger;
         }
 
+
+
         public IntroductionList IntroList() {
+            //string source = "studySession";
+            //string logName = "Application";
+          
             IntroductionList introList = new IntroductionList();
             introList.List = new List<IntroductionModel>();
 
-            using (StudySessionDBContext db = new StudySessionDBContext())
+            try
             {
-                IntroductionList introductionListModel = new IntroductionList();
-                var Introduction_List = db.employee.Where(x => x.is_delete == Const.Const.NoDeleteFlg).ToList();
-                var get_intro_list = from intro in Introduction_List
-                                          select new IntroductionModel()
-                                          {
-                                              Id = intro.Id,
-                                              LastName = intro.lastName,
-                                              FirstName = intro.firstName,
-                                              FullNameKana = intro.fullNameKana,
-                                              EntryYear = intro.entryYear,
-                                              EntryMonth = intro.entryMonth,
-                                              BirthDay = intro.birthDay.ToString().Split(" ")[0],
-                                              Hobby = intro.hobby,
-                                          };
+                using (StudySessionDBContext db = new StudySessionDBContext())
+                {
+                    IntroductionList introductionListModel = new IntroductionList();
+                    var Introduction_List = db.employee.Where(x => x.is_delete == Const.Const.NoDeleteFlg).ToList();
+                    var get_intro_list = from intro in Introduction_List
+                                         select new IntroductionModel()
+                                         {
+                                             Id = intro.Id,
+                                             LastName = intro.lastName,
+                                             FirstName = intro.firstName,
+                                             FullNameKana = intro.fullNameKana,
+                                             EntryYear = intro.entryYear,
+                                             EntryMonth = intro.entryMonth,
+                                             BirthDay = intro.birthDay.ToString().Split(" ")[0],
+                                             Hobby = intro.hobby,
+                                         };
 
-                introList.List = get_intro_list.ToList();
+                    introList.List = get_intro_list.ToList();
 
-                
 
-                
+
+
+                }
+            }catch(Exception ex)
+            {
+                _logger.LogError(ex.Message, "IntroList()内で例外が発生しました");
             }
+            
 
             introList.selectListYearItems = SetSelectYearList();
             introList.selectListMonthItems = SetSelectMonthList();
@@ -74,6 +91,8 @@ namespace studySession.Logic
             {
                 employee.birthDay = DateTime.Parse(input.BirthDay);
             }
+            //employee.birthDay = input.BirthDay;
+
             employee.hobby = input.Hobby;
             employee.is_delete = "0";
 

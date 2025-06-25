@@ -1,38 +1,24 @@
-﻿
-
-@{
+﻿@{
     @model studySession.Models.IntroductionList;
     Layout = "~/Views/Base/Base.cshtml";
 }
-<link rel="stylesheet" href="style.css">
-
 
 
 <body>
     @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-            {
+    {
         <div class="contents">
-            <div class="buttons">
-            
-                <select id="employeeSelect" class="select-style">
-                    <option value="">社員情報変更できます</option>
-                    <option value="1">社員追加</option>
-                    <option value="2">社員変更</option>
-                    <option value="3">社員削除</option>
-                </select>
+           
 
-            </div>
-            @if(Model.List.Count != 0)
+            @if (Model.List.Count != 0)
             {
                 var num = 1;
                 var space = " ";
                 var coron = ".";
-
-               
-                    <div class="container">
-                        <div id="count"  hidden>
-                            @Model.List.Count
-                        </div>
+                <div class="container">
+                    <div id="count" hidden>
+                        @Model.List.Count
+                    </div>
                     @for (var i = 0; i < Model.List.Count; i++)
                     {
                         var head_rotate = i % 2 == 0 ? " head-rotate-red" : " head-rotate-blue";
@@ -41,51 +27,55 @@
                         var line = "line" + num;
                         var cardId = "card" + (i + 1);
                         var Id = "Id_" + (i + 1);
-                        var flag = false; 
-                        @if (i % 4 == 0)
+                        var flag = false;
+
+                        if (i % 4 == 0)
                         {
                             flag = true;
                             num++;
                         }
+
                         if (flag)
                         {
-                            @:<div id=@line , style="display:flex;">
+                            @:<div id=@line style="display:flex;">
                         }
 
                         <div id=@cardId class="card-item @card_item_rotate radio-div">
-
                             <div class="pin">
                                 <div class="head @head_rotate"></div>
                                 <div class="needle @needle_rotate"></div>
                             </div>
 
                             <div class="item-center">
-                                <div style="width:90%;height:200px">
+                                <div style="width:85%;height:250px; border-radius:50%;">
                                     <div class="card-item-image"></div>
                                 </div>
                             </div>
 
                             <div id=@Id class="getItem" hidden>
+                                @* カードID *@
                                 @Model.List[i].Id
                             </div>
 
                             <div id="employeeName" class="margin-style">
-                                <div style="display:flex;">
-                                    <div class="icon-style margin-right-10">
-                                        1
-                                    </div>
-                                    <div class="set-font-weight getItem">
-                                        @Model.List[i].LastName@space@Model.List[i].FirstName
-                                    </div>
+                               <div style="font-size:16pt" class="set-font-weight getItem">
+                                   @* 姓、名 *@
+                                  @Model.List[i].LastName@space@Model.List[i].FirstName
                                 </div>
+                            </div>
+
+                            <div class="getItem" hidden>
+                                @* フルネームカナ *@
+                                @Model.List[i].FullNameKana
                             </div>
 
                             <div id="entryDay" class="margin-style">
                                 <div style="display:flex;">
                                     <div class="icon-style margin-right-10">
-                                        2
+                                        1
                                     </div>
                                     <div class="set-font-weight getItem">
+                                        @* 入社年月 *@
                                         @Model.List[i].EntryYear@coron@Model.List[i].EntryMonth
                                     </div>
                                 </div>
@@ -94,9 +84,10 @@
                             <div id="birthDay" class="margin-style">
                                 <div style="display:flex;">
                                     <div class="icon-style margin-right-10">
-                                        3
+                                        2
                                     </div>
                                     <div class="set-font-weight getItem">
+                                        @* 誕生日 *@
                                         @Model.List[i].BirthDay
                                     </div>
                                 </div>
@@ -105,74 +96,78 @@
                             <div id="hobby" class="margin-style">
                                 <div style="display:flex;">
                                     <div class="icon-style margin-right-10">
-                                        4
+                                        3
                                     </div>
                                     <div class="set-font-weight getItem">
+                                        @* 趣味 *@
                                         @Model.List[i].Hobby
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-                        // 4つ目の後に行を閉じる
-                    if ((i + 1) % 4 == 0 || i == Model.List.Count - 1)
-                    {
-                        @: </div>
+                        @if ((i + 1) % 4 == 0 || i == Model.List.Count - 1)
+                        {
+                            @:</div>
+                        }
                     }
-                }
                 </div>
             }
-            
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <h2>社員作成</h2>
-                    <div class="main">
-                        @Html.HiddenFor(model => model.Id)
-                        <div style="font-size:20pt;">
-                            @Html.DisplayNameFor(model => model.LastName)
-                            <br>
-                            @Html.TextBoxFor(model => model.LastName ,new { @class = "require" })
-                        </div>
-                        <div class="input-area-style">
-                            @Html.DisplayNameFor(model => model.FirstName)
-                            <br>
-                            @Html.TextBoxFor(model => model.FirstName ,new { @class = "require" })
-                        </div>
-                        <div class="input-area-style">
-                            @Html.DisplayNameFor(model => model.FullNameKana)
-                            <br>
-                            @Html.TextBoxFor(model => model.FullNameKana ,new { @class = "require" })
-                        </div>
-                        <div class="input-area-style">
-                             @Html.DisplayNameFor(model => model.EntryYear)
-                            <br>
-                            @Html.DropDownListFor(model => model.EntryYear,Model.selectListYearItems,new { @class = "require" })月
-                            @Html.DropDownListFor(model => model.EntryMonth,Model.selectListMonthItems,new { @class = "require" })日
-                        </div>
-                        <div class="input-area-style">
-                             @Html.DisplayNameFor(model => model.BirthDay)
-                            <br>
-                            @Html.TextBoxFor(model => model.BirthDay,new {@type = "date",@class = "require" })
-                        </div>
-                        <div class="input-area-style">
-                             @Html.DisplayNameFor(model => model.Hobby)
-                            <br>
-                            @Html.TextBoxFor(model => model.Hobby,new { @class = "require" })
-                        </div>
-                        
+        </div>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2 id="modalTitle">社員作成</h2>
+                <div class="main" style="overflow-x:hidden">
+                    @Html.HiddenFor(model => model.Id, new { @class = "require" })
+                    <div style="font-size:20pt;">
+                        @Html.DisplayNameFor(model => model.LastName)
+                        <br>
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "require" })
                     </div>
-                    <div style="margin:3% auto;">
-                        <input id="entry" type="button" value="登録"/>
-                        <input id="hiddenEntry" type="submit" value="entry" style="display:none"/>
-                        <input id="hiddenUpdate" type="submit" value="update" style="display:none"/>
-                        <input id="hiddenDelete" type="submit" value="delete" style="display:none"/>
+                    <div class="input-area-style">
+                        @Html.DisplayNameFor(model => model.FirstName)
+                        <br>
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "require" })
+                    </div>
+                    <div class="input-area-style">
+                        @Html.DisplayNameFor(model => model.FullNameKana)
+                        <br>
+                        @Html.TextBoxFor(model => model.FullNameKana, new { @class = "require" })
+                    </div>
+                    <div class="input-area-style">
+                        @Html.DisplayNameFor(model => model.EntryYear)
+                        <br>
+                        @Html.DropDownListFor(model => model.EntryYear, Model.selectListYearItems, new { @class = "require" })月
+                        @Html.DropDownListFor(model => model.EntryMonth, Model.selectListMonthItems, new { @class = "require" })日
+                    </div>
+                    <div class="input-area-style">
+                        @Html.DisplayNameFor(model => model.BirthDay)
+                        <br>
+                        @Html.TextBoxFor(model => model.BirthDay, new { @type = "date", @class = "require" })
+                    </div>
+                    <div class="input-area-style">
+                        @Html.DisplayNameFor(model => model.Hobby)
+                        <br>
+                        @Html.TextBoxFor(model => model.Hobby, new { @class = "require" })
+                    </div>
+                    <div  class="input-area-style">
+                        <div>
+                            <input type="file" id="photoInput" name="photo" accept="image/*">
+                        </div>
+                        <div class="circle-frame">
+                            <img id="previewImage" src="#" alt="プレビュー画像">
+                        </div>
+                        <div>
+                            <input type="range" id="rangeZoom" min="1" max="3" step="0.01" value="1">
+                        </div>
                     </div>
                 </div>
+                <div style="margin:3% auto;">
+                    <input id="entry" type="button" class="btn-style btn btn-primary" value="作成"/>
+                </div>
             </div>
-            
         </div>
     }
 </body>
 <script src="./js/HomeIndex.js"></script>
-    

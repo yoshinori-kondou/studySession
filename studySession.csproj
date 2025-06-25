@@ -4,6 +4,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+     <TypeScriptCompileOnSaveEnabled>true</TypeScriptCompileOnSaveEnabled>
+  <TypeScriptSourceMap>true</TypeScriptSourceMap> <!-- ← コレ！ -->
+  <TypeScriptOutDir>wwwroot/js</TypeScriptOutDir>
+  <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,10 +26,6 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\js\Fetch\" />
-    <Folder Include="wwwroot\js\HomeIndex\" />
-  </ItemGroup>
+  
 
 </Project>

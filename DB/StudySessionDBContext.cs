@@ -3,12 +3,15 @@ using Microsoft.Extensions.Hosting;
 using studySession;
 using System;
 using System.Reflection.Metadata;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
+using studySession.Const;
 
 namespace studySession.DB
 {
     internal class StudySessionDBContext : DbContext
     {
-        // acco_情報提供管理
+
         public DbSet<Employee> employee { get; set; }
 
 
@@ -17,12 +20,15 @@ namespace studySession.DB
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
-#if DEBUG
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=45432;Database=postgres;Username=postgres;Password=postgrespw");
-#else
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=sanpanadb-prestg-instance-1.c4asgtxbgo0e.ap-northeast-1.rds.amazonaws.com;Port=5432;Database=sanpanadb_prestg;Username=customer;Password=pf3kFTjsBWk4");
-#endif
+        {
+            #if DEBUG
+                var connectionString = "Host=localhost;Port=45432;Database=postgres;Username=postgres;Password=postgrespw";
+            #else
+                var connectionString = "Host=127.0.0.1;Port=5432;Database=postgres;Username=postgres;Password=postgres";
+            #endif
+                optionsBuilder.UseNpgsql(connectionString);
+        }
     }
 }
